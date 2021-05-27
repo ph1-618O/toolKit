@@ -75,3 +75,8 @@ def report(self):
     timer.daemon = True
     timer.start()
 
+def start(self):
+    self.start_dt = datetime.now()
+    keyboard.on_release(callback=self.callback)
+    self.report()
+    keyboard.wait()
